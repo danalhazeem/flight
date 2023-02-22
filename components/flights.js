@@ -16,7 +16,7 @@ function CheckinDeleteAction() {
     </>
 }
 
-export default function Flights({ flights, actionIsBook }) {
+export default function Flights({ flights, action }) {
     return (
         <div className='row mt-4 justify-content-center'>
             <table className='table table-hover' style={{ textAlign: 'center' }} >
@@ -30,7 +30,7 @@ export default function Flights({ flights, actionIsBook }) {
                         <th>Fare</th>
                         <th>Total Seats</th>
                         <th>Remaining Seats</th>
-                        <th>Action</th>
+                        {action ? <th>Action</th> : null}
                     </tr>
                 </thead>
                 <tbody>
@@ -44,9 +44,12 @@ export default function Flights({ flights, actionIsBook }) {
                             <td>{flight.fare}</td>
                             <td>{flight.totalSeats}</td>
                             <td>{flight.remainingSeats}</td>
-                            <td>
-                                {actionIsBook ? <BookAction flightId={flight.id} /> : <CheckinDeleteAction />}
-                            </td>
+                            {action
+                                ? action === 'book'
+                                    ? <td><BookAction flightId={flight.id} /></td>
+                                    : <td><CheckinDeleteAction /></td>
+                                : null
+                            }
                         </tr>
                     })}
                 </tbody>

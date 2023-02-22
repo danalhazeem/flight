@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import Head from 'next/head'
 import Flights from '@/components/flights'
-import styles from '@/styles/Home.module.css'
 import flightService from '@/services/flight.service'
 import 'bootstrap/dist/css/bootstrap.min.css'
 
@@ -30,7 +29,7 @@ export default function Flight() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       <main className='container d-flex flex-column align-items-center mt-4 pt-4'>
-        <h1 className={`${styles.heading} boldest col`}>Flights</h1>
+        <h1 className="heading boldest col">Flights</h1>
         <div className='col mt-4'>
           <form className='row-6 input-group mt-4' onSubmit={handleSubmit}>
             <input type='text' aria-label='From Location' className='form-control' placeholder='From' value={from} onChange={handleFromChange} required />

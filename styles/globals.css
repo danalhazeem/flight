@@ -13,3 +13,7 @@ body {
 .boldest {
   font-weight: 900;
 }
+
+.heading {
+  font-size: 3vw;
+}

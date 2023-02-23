@@ -1,4 +1,5 @@
 import { useContext, useState } from "react"
+import { useRouter } from "next/router"
 import Head from "next/head"
 import Flights from "@/components/flights"
 import UserContext from "@/contexts/user"
@@ -11,6 +12,7 @@ export default function BookPage({ flights }) {
     const [lastName, setLastName] = useState('')
     const [message, setMessage] = useState(null)
 
+    const router = useRouter()
     const { user: { token } } = useContext(UserContext)
 
     const handleFirstNameChange = (event) => setFirstName(event.target.value)

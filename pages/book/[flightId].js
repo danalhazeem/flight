@@ -1,30 +1,14 @@
-import { useRouter } from "next/router"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import Head from "next/head"
 import Flights from "@/components/flights"
 import flightService from "@/services/flight.service"
 import bookingService from "@/services/booking.service"
 import 'bootstrap/dist/css/bootstrap.min.css'
 
-export default function BookPage() {
+export default function BookPage({ flights }) {
     const [firstName, setFirstName] = useState('')
     const [lastName, setLastName] = useState('')
-    const [flights, setFlights] = useState([])
     const [message, setMessage] = useState(null)
-
-    const router = useRouter()
-    const { flightId } = router.query
-
-    useEffect(() => {
-        if (flightId) {
-            flightService.getFlight(flightId)
-                .then((flight) => setFlights([flight]))
-                .catch((error) => {
-                    setFlights(null)
-                    console.error(error)
-                })
-        }
-    }, [flightId])
 
     const handleFirstNameChange = (event) => setFirstName(event.target.value)
     const handleLastNameChange = (event) => setLastName(event.target.value)
@@ -72,4 +56,14 @@ export default function BookPage() {
             </main>
         </>
     )
+}
+
+export async function getServerSideProps(context) {
+    const { flightId } = context.query
+    try {
+        const flight = await flightService.getFlight(flightId)
+        return { props: { flights: [flight] } }
+    } catch (error) {
+        return { props: { flights: null } }
+    }
 }

@@ -1,6 +1,7 @@
-import { useState } from "react"
+import { useContext, useState } from "react"
 import Head from "next/head"
 import Flights from "@/components/flights"
+import UserContext from "@/contexts/user"
 import flightService from "@/services/flight.service"
 import bookingService from "@/services/booking.service"
 import 'bootstrap/dist/css/bootstrap.min.css'
@@ -10,12 +11,14 @@ export default function BookPage({ flights }) {
     const [lastName, setLastName] = useState('')
     const [message, setMessage] = useState(null)
 
+    const { user: { token } } = useContext(UserContext)
+
     const handleFirstNameChange = (event) => setFirstName(event.target.value)
     const handleLastNameChange = (event) => setLastName(event.target.value)
 
     const handleSubmit = (event) => {
         event.preventDefault()
-        bookingService.createBooking(flightId, firstName, lastName)
+        bookingService.createBooking(flights[0].id, firstName, lastName, token)
             .then((booking) => {
                 setMessage({ type: 'success', content: 'Booking confirmed, redirecting..' })
                 setTimeout(() => router.push('/bookings'), 2000)

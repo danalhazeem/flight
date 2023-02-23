@@ -17,7 +17,7 @@ export default function RegisterPage(props) {
     function handleSubmit(event) {
         event.preventDefault()
         authService.register(email, password)
-            .then((data) => { // redirect to login page
+            .then((data) => {
                 setMessage({ type: 'success', content: 'Registered successfully, redirecting..' })
                 setTimeout(() => router.push('/login'), 2000)
             })

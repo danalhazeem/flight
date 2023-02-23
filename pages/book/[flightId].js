@@ -6,7 +6,7 @@ import flightService from "@/services/flight.service"
 import bookingService from "@/services/booking.service"
 import 'bootstrap/dist/css/bootstrap.min.css'
 
-export default function Book() {
+export default function BookPage() {
     const [firstName, setFirstName] = useState('')
     const [lastName, setLastName] = useState('')
     const [flights, setFlights] = useState([])
@@ -31,7 +31,7 @@ export default function Book() {
 
     const handleSubmit = (event) => {
         event.preventDefault()
-        bookingService.createBooking({ flightId, firstName, lastName })
+        bookingService.createBooking(flightId, firstName, lastName)
             .then((booking) => {
                 setMessage({ type: 'success', content: 'Booking confirmed, redirecting..' })
                 setTimeout(() => router.push('/bookings'), 2000)
@@ -52,15 +52,15 @@ export default function Book() {
         <>
             <Head>
                 <title>Flight Booking System - Book</title>
-                <meta name="description" content="A Flight Booking System application built using NextJs & Spring Cloud" />
+                <meta name="description" content="A Flight Booking System application built using Nextjs & Spring Cloud" />
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
             </Head>
             <main className='container d-flex flex-column align-items-center mt-4 pt-4'>
                 <h1 className="heading boldest">Book</h1>
                 {flights === null
-                    ? <h3 className="boldest mt-4">No such flights available!</h3>
+                    ? <p className="fs-5 mt-4">No such flight available</p>
                     : <div className='row mt-4 justify-content-center'>
-                        <Flights flights={flights} actionIsBook={true} />
+                        <Flights flights={flights} hasBookingAction={false} />
                         <form className='col-4 mt-4 d-flex flex-column align-items-center text-center' onSubmit={handleSubmit}>
                             <input type='text' aria-label='First Name' className='form-control' placeholder='First Name' value={firstName} onChange={handleFirstNameChange} required />
                             <input type='text' aria-label='Last Name' className='form-control mt-2' placeholder='Last Name' value={lastName} onChange={handleLastNameChange} required />

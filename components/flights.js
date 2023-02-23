@@ -8,15 +8,7 @@ function BookAction({ flightId }) {
     )
 }
 
-function CheckinDeleteAction() {
-    return <>
-        <span className='btn-link link-dark' style={{ cursor: 'pointer' }} onClick={() => { }}>Checkin</span>
-        <span> </span>
-        <span className='btn-link link-danger' style={{ cursor: 'pointer' }} onClick={() => { }}>Delete</span>
-    </>
-}
-
-export default function Flights({ flights, action }) {
+export default function Flights({ flights, hasBookingAction }) {
     return (
         <div className='row mt-4 justify-content-center'>
             <table className='table table-hover' style={{ textAlign: 'center' }} >
@@ -30,7 +22,7 @@ export default function Flights({ flights, action }) {
                         <th>Fare</th>
                         <th>Total Seats</th>
                         <th>Remaining Seats</th>
-                        {action ? <th>Action</th> : null}
+                        {hasBookingAction ? <th>Action</th> : null}
                     </tr>
                 </thead>
                 <tbody>
@@ -44,10 +36,8 @@ export default function Flights({ flights, action }) {
                             <td>{flight.fare}</td>
                             <td>{flight.totalSeats}</td>
                             <td>{flight.remainingSeats}</td>
-                            {action
-                                ? action === 'book'
-                                    ? <td><BookAction flightId={flight.id} /></td>
-                                    : <td><CheckinDeleteAction /></td>
+                            {hasBookingAction
+                                ? <td><BookAction flightId={flight.id} /></td>
                                 : null
                             }
                         </tr>

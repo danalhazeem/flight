@@ -1,13 +1,25 @@
-import { useState } from "react"
+import { useEffect, useState, useContext } from "react"
 import { Toaster, toast } from "react-hot-toast"
 import Head from "next/head"
+import UserContext from "@/contexts/user"
 import Bookings from "@/components/bookings"
 import bookingService from "@/services/booking.service"
 import checkinService from "@/services/checkin.service"
 import 'bootstrap/dist/css/bootstrap.min.css'
 
-export default function BookingsPage(props) {
-    const [bookings, setBookings] = useState(props.bookings)
+export default function BookingsPage() {
+    const [bookings, setBookings] = useState([])
+
+    const { user: { token } } = useContext(UserContext)
+
+    useEffect(() => {
+        bookingService.getBookings(token)
+            .then((bookings) => setBookings(bookings))
+            .catch((error) => {
+                console.log(error)
+                setBookings(null)
+            })
+    }, [])
 
     const handleCheckinClick = ({ target }) => {
         const checkedIn = target.parentElement.previousElementSibling.innerText === 'Yes' ? true : false
@@ -18,7 +30,7 @@ export default function BookingsPage(props) {
             return
         }
 
-        checkinService.checkin(id)
+        checkinService.checkin(id, token)
             .then(({ checkinStatus, seatNumber }) => {
                 const updated = bookings.map((booking) => {
                     return booking.id !== id
@@ -32,7 +44,7 @@ export default function BookingsPage(props) {
 
     const handleDeleteClick = (event) => {
         const id = Number(event.target.getAttribute('data-id'))
-        bookingService.deleteBooking(id)
+        bookingService.deleteBooking(id, token)
             .then((data) => {
                 const filtered = bookings.filter((booking) => booking.id !== id)
                 setBookings(filtered)
@@ -62,13 +74,4 @@ export default function BookingsPage(props) {
             </main>
         </>
     )
-}
-
-export async function getServerSideProps(context) {
-    try {
-        const bookings = await bookingService.getBookings()
-        return { props: { bookings } }
-    } catch (error) {
-        return { props: { bookings: null } }
-    }
 }

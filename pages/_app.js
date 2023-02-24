@@ -1,6 +1,7 @@
-import UserContext from '@/contexts/user'
-import '@/styles/globals.css'
 import { useEffect, useState } from 'react'
+import UserContext from '@/contexts/user'
+import Navbar from "@/components/navbar"
+import '@/styles/globals.css'
 
 export default function App({ Component, pageProps }) {
     const [user, setUser] = useState({
@@ -17,6 +18,7 @@ export default function App({ Component, pageProps }) {
 
     return (
         <UserContext.Provider value={{ user, setUser }}>
+            <Navbar />
             <Component {...pageProps} />
         </UserContext.Provider>
     )

@@ -8,5 +8,11 @@ const register = (email, password) => {
     return promise.then((response) => response.data)
 }
 
-const authService = { register }
+const login = (email, password) => {
+    const body = { email, password }
+    const promise = axios.post(`${base}/login`, body)
+    return promise.then((response) => response.data)
+}
+
+const authService = { register, login }
 export default authService

@@ -9,7 +9,6 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 
 export default function BookingsPage() {
     const [bookings, setBookings] = useState([])
-
     const { user: { token } } = useContext(UserContext)
 
     useEffect(() => {
@@ -19,7 +18,7 @@ export default function BookingsPage() {
                 console.log(error)
                 setBookings(null)
             })
-    }, [])
+    }, [token])
 
     const handleCheckinClick = ({ target }) => {
         const checkedIn = target.parentElement.previousElementSibling.innerText === 'Yes' ? true : false
@@ -39,7 +38,14 @@ export default function BookingsPage() {
                 setBookings(updated)
                 toast.success('Checked-in successfully!')
             })
-            .catch((error) => console.error(error))
+            .catch((error) => {
+                console.error(error)
+                const message = error.response.data.error
+                toast.error(
+                    message.charAt(0).toUpperCase() + message.substring(1)
+                    + '\nPlease refresh the page for updated info'
+                )
+            })
     }
 
     const handleDeleteClick = (event) => {
@@ -50,7 +56,13 @@ export default function BookingsPage() {
                 setBookings(filtered)
                 toast.success('Booking deleted successfully!')
             })
-            .catch((error) => console.log(error))
+            .catch((error) => {
+                console.log(error)
+                toast.error(
+                    'Booking not found or already deleted'
+                    + '\nPlease refresh the page for updated info'
+                )
+            })
     }
 
     return (

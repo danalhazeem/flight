@@ -15,5 +15,5 @@ body {
 }
 
 .heading {
-  font-size: 3vw;
+  font-size: calc(1.1rem + 3vw);
 }

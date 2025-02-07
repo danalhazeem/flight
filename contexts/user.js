@@ -1,10 +1,10 @@
-const { createContext } = require("react")
+// const { createContext } = require("react")
 
-const UserContext = createContext({
-    user: {
-        token: null,
-    },
-    setUser: () => {},
-})
+// const UserContext = createContext({
+//     user: {
+//         token: null,
+//     },
+//     setUser: () => {},
+// })
 
-export default UserContext
+// export default UserContext

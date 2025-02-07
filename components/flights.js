@@ -1,49 +1,39 @@
-import Link from 'next/link'
+import { useRouter } from 'next/router';
+import flightsData from '@/data';
 
-function BookAction({ flightId }) {
-    return (
-        <Link href={`/book/${flightId}`} className="link-dark">
-            Book
-        </Link>
-    )
-}
+function Flights() {
+    const router = useRouter();
 
-export default function Flights({ flights, hasBookingAction }) {
+    const handleBookNow = (flight, ticket) => {
+        const selectedFlight = { ...flight, ...ticket };
+
+        // Save selected flight to localStorage
+        localStorage.setItem('selected-flight', JSON.stringify(selectedFlight));
+
+        // Redirect to payment page
+        router.push('/payment');
+    };
+
     return (
-        <div className='row mt-4 justify-content-center'>
-            <table className='table table-hover' style={{ textAlign: 'center' }} >
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Number</th>
-                        <th>From</th>
-                        <th>To</th>
-                        <th>Date</th>
-                        <th>Fare</th>
-                        <th>Total Seats</th>
-                        <th>Remaining Seats</th>
-                        {hasBookingAction ? <th>Action</th> : null}
-                    </tr>
-                </thead>
-                <tbody>
-                    {flights.map(flight => {
-                        return <tr key={flight.id}>
-                            <td>{flight.id}</td>
-                            <td>{flight.number}</td>
-                            <td>{flight.source}</td>
-                            <td>{flight.destination}</td>
-                            <td>{flight.date}</td>
-                            <td>{flight.fare}</td>
-                            <td>{flight.totalSeats}</td>
-                            <td>{flight.remainingSeats}</td>
-                            {hasBookingAction
-                                ? <td><BookAction flightId={flight.id} /></td>
-                                : null
-                            }
-                        </tr>
-                    })}
-                </tbody>
-            </table>
+        <div>
+            {flightsData.map((flight) => (
+                <div key={flight.airline} className="flight-card">
+                    <h3>{flight.airline}</h3>
+                    <p>{flight.from} → {flight.to}</p>
+                    <p>Duration: {flight.duration}</p>
+                    <img src={flight.image} alt={flight.airline} width="100" />
+                    
+                    <h4>Available Tickets:</h4>
+                    {flight.tickets.map((ticket, index) => (
+                        <div key={index} className="d-flex justify-content-between p-2 border">
+                            <span>{ticket.class}: {ticket.price} {ticket.currency}</span>
+                            <button className="btn btn-primary" onClick={() => handleBookNow(flight, ticket)}>Book Now</button>
+                        </div>
+                    ))}
+                </div>
+            ))}
         </div>
-    )
+    );
 }
+
+export default Flights;

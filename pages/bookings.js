@@ -11,14 +11,14 @@ export default function BookingsPage() {
     const [bookings, setBookings] = useState([])
     const { user: { token } } = useContext(UserContext)
 
-    useEffect(() => {
-        bookingService.getBookings(token)
-            .then((bookings) => setBookings(bookings))
-            .catch((error) => {
-                console.log(error)
-                setBookings(null)
-            })
-    }, [token])
+    // useEffect(() => {
+    //     bookingService.getBookings(token)
+    //         .then((bookings) => setBookings(bookings))
+    //         .catch((error) => {
+    //             console.log(error)
+    //             setBookings(null)
+    //         })
+    // }, [token])
 
     const handleCheckinClick = ({ target }) => {
         const checkedIn = target.parentElement.previousElementSibling.innerText === 'Yes' ? true : false
@@ -72,7 +72,9 @@ export default function BookingsPage() {
                 <meta name="description" content="A Flight Booking System application built using Nextjs & Spring Cloud" />
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
             </Head>
+        
             <main className='container d-flex flex-column align-items-center mt-4 pt-4'>
+            
                 <h1 className="heading boldest">Bookings</h1>
                 <Toaster position="top-right" />
                 {bookings === null
@@ -83,7 +85,9 @@ export default function BookingsPage() {
                         handleDeleteClick={handleDeleteClick}
                     />
                 }
+                
             </main>
+            
         </>
     )
 }

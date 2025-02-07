@@ -1,0 +1,103 @@
+const airlineFlightsData = [
+    {
+      airline: "Emirates",
+      image: "https://logowik.com/content/uploads/images/emirates-airlines5173.jpg",
+      from: "Dubai (DXB)",
+      to: "London (LHR)",
+      departure: "2025-03-15T08:30:00",
+      arrival: "2025-03-15T12:30:00",
+      duration: "8h",
+      tickets: [
+        { class: "Economy", price: 450, currency: "KWD" },
+        { class: "Business", price: 1200, currency: "KWD" },
+        { class: "First Class", price: 2500, currency: "KWD" },
+      ],
+    },
+    {
+      airline: "Qatar Airways",
+      image: "https://logowik.com/content/uploads/images/qatar-airways7882.jpg",
+      from: "Doha (DOH)",
+      to: "New York (JFK)",
+      departure: "2025-03-20T10:00:00",
+      arrival: "2025-03-20T19:00:00",
+      duration: "14h",
+      tickets: [
+        { class: "Economy", price: 600, currency: "KWD" },
+        { class: "Business", price: 1400, currency: "KWD" },
+        { class: "First Class", price: 2800, currency: "KWD" },
+      ],
+    },
+    {
+      airline: "Turkish Airlines",
+      image: "https://logowik.com/content/uploads/images/turkish-airlines3882.jpg",
+      from: "Istanbul (IST)",
+      to: "Paris (CDG)",
+      departure: "2025-04-10T14:00:00",
+      arrival: "2025-04-10T16:30:00",
+      duration: "3h 30m",
+      tickets: [
+        { class: "Economy", price: 320, currency: "KWD" },
+        { class: "Business", price: 900, currency: "KWD" },
+        { class: "First Class", price: 1800, currency: "KWD" },
+      ],
+    },
+    {
+      airline: "British Airways",
+      image: "https://logowik.com/content/uploads/images/british-airways8267.jpg",
+      from: "London (LHR)",
+      to: "Dubai (DXB)",
+      departure: "2025-04-05T22:00:00",
+      arrival: "2025-04-06T08:00:00",
+      duration: "8h",
+      tickets: [
+        { class: "Economy", price: 500, currency: "KWD" },
+        { class: "Business", price: 1100, currency: "KWD" },
+        { class: "First Class", price: 2400, currency: "KWD" },
+      ],
+    },
+    {
+      airline: "Lufthansa",
+      image: "https://logowik.com/content/uploads/images/lufthansa8583.jpg",
+      from: "Frankfurt (FRA)",
+      to: "Tokyo (NRT)",
+      departure: "2025-05-12T09:30:00",
+      arrival: "2025-05-12T23:45:00",
+      duration: "13h 15m",
+      tickets: [
+        { class: "Economy", price: 750, currency: "KWD" },
+        { class: "Business", price: 1600, currency: "KWD" },
+        { class: "First Class", price: 3200, currency: "KWD" },
+      ],
+    },
+    {
+      airline: "Singapore Airlines",
+      image: "https://logowik.com/content/uploads/images/singapore-airlines9517.jpg",
+      from: "Singapore (SIN)",
+      to: "Los Angeles (LAX)",
+      departure: "2025-06-08T21:45:00",
+      arrival: "2025-06-09T07:30:00",
+      duration: "15h 45m",
+      tickets: [
+        { class: "Economy", price: 900, currency: "KWD" },
+        { class: "Business", price: 2000, currency: "KWD" },
+        { class: "First Class", price: 4000, currency: "KWD" },
+      ],
+    },
+    {
+      airline: "Etihad Airways",
+      image: "https://logowik.com/content/uploads/images/etihad-airways8267.jpg",
+      from: "Abu Dhabi (AUH)",
+      to: "Sydney (SYD)",
+      departure: "2025-07-20T17:00:00",
+      arrival: "2025-07-21T10:00:00",
+      duration: "14h",
+      tickets: [
+        { class: "Economy", price: 850, currency: "KWD" },
+        { class: "Business", price: 1900, currency: "KWD" },
+        { class: "First Class", price: 3800, currency: "KWD" },
+      ],
+    },
+  ];
+  
+  export default airlineFlightsData;
+  

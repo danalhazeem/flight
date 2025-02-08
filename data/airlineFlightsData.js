@@ -1,7 +1,7 @@
 const airlineFlightsData = [
     {
       airline: "Emirates",
-      image: "https://logowik.com/content/uploads/images/emirates-airlines5173.jpg",
+      image: "https://i.pinimg.com/474x/23/bc/33/23bc3337c233c6104e0226409bd8da09.jpg",
       from: "Dubai (DXB)",
       to: "London (LHR)",
       departure: "2025-03-15T08:30:00",
@@ -15,7 +15,7 @@ const airlineFlightsData = [
     },
     {
       airline: "Qatar Airways",
-      image: "https://logowik.com/content/uploads/images/qatar-airways7882.jpg",
+      image: "https://i.pinimg.com/474x/83/e5/d4/83e5d4359c0c1ff5d1f17f2ba3bd5f0e.jpg",
       from: "Doha (DOH)",
       to: "New York (JFK)",
       departure: "2025-03-20T10:00:00",
@@ -29,7 +29,7 @@ const airlineFlightsData = [
     },
     {
       airline: "Turkish Airlines",
-      image: "https://logowik.com/content/uploads/images/turkish-airlines3882.jpg",
+      image: "https://i.pinimg.com/474x/e1/fd/89/e1fd89e5416db4c1c0bb9a92dd2c9a8e.jpg",
       from: "Istanbul (IST)",
       to: "Paris (CDG)",
       departure: "2025-04-10T14:00:00",
@@ -43,7 +43,7 @@ const airlineFlightsData = [
     },
     {
       airline: "British Airways",
-      image: "https://logowik.com/content/uploads/images/british-airways8267.jpg",
+      image: "https://i.pinimg.com/474x/61/66/43/616643c13026c75e85a421ec7d4b99a4.jpg",
       from: "London (LHR)",
       to: "Dubai (DXB)",
       departure: "2025-04-05T22:00:00",
@@ -57,7 +57,7 @@ const airlineFlightsData = [
     },
     {
       airline: "Lufthansa",
-      image: "https://logowik.com/content/uploads/images/lufthansa8583.jpg",
+      image: "https://i.pinimg.com/474x/ce/0c/ec/ce0cecde24142acba612a491edd0d3df.jpg",
       from: "Frankfurt (FRA)",
       to: "Tokyo (NRT)",
       departure: "2025-05-12T09:30:00",
@@ -71,7 +71,7 @@ const airlineFlightsData = [
     },
     {
       airline: "Singapore Airlines",
-      image: "https://logowik.com/content/uploads/images/singapore-airlines9517.jpg",
+      image: "https://i.pinimg.com/474x/9d/4c/e0/9d4ce04bac2321e72ba677910ca0d35b.jpg",
       from: "Singapore (SIN)",
       to: "Los Angeles (LAX)",
       departure: "2025-06-08T21:45:00",
@@ -85,7 +85,7 @@ const airlineFlightsData = [
     },
     {
       airline: "Etihad Airways",
-      image: "https://logowik.com/content/uploads/images/etihad-airways8267.jpg",
+      image: "https://i.pinimg.com/474x/7d/58/44/7d58443e32f4490596a8e5462e038479.jpg",
       from: "Abu Dhabi (AUH)",
       to: "Sydney (SYD)",
       departure: "2025-07-20T17:00:00",

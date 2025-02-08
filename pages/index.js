@@ -52,6 +52,7 @@ export default function FlightPage() {
           margin: 0,
         }}
       >
+        <Navbar />
         <div className="text-center text-white">
           {/* Heading */}
           <h1 className="heading boldest">Flights</h1>

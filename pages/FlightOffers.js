@@ -1,6 +1,7 @@
 import React from "react";
 import { useRouter } from "next/router";
 import flights from "@/data/flightsData";
+import Navbar from "@/components/navbar";
 
 const FlightsPage = () => {
   const router = useRouter();
@@ -13,6 +14,7 @@ const FlightsPage = () => {
 
   return (
     <div className="container my-5">
+      
       <h1 className="fw-bold">Flight Offer Deals</h1>
 
       {/* Scrollable Flight List */}

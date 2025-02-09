@@ -1,61 +1,89 @@
-function CheckinDeleteAction({ bookingId, checkinStatus, handleCheckinClick, handleDeleteClick }) {
-    return <>
-        <span data-id={bookingId} className='btn-link link-dark' style={{ cursor: 'pointer' }} onClick={handleCheckinClick}>
-            Checkin
-        </span>
-        <span data-id={bookingId} className='ms-3 btn-link link-danger' style={{ cursor: 'pointer' }} onClick={handleDeleteClick}>
-            Delete
-        </span>
-    </>
-}
+// import { useState } from "react";
+// import Head from "next/head";
+// import "bootstrap/dist/css/bootstrap.min.css";
+// import Footer from "@/components/Footer";
+// import Navbar from "@/components/navbar";
 
-export default function Bookings({ bookings, handleCheckinClick, handleDeleteClick }) {
-    return (
-        <div className='row mt-4 justify-content-center'>
-            {bookings.length === 0
-                ? <p className="fs-5 mt-4">No active bookings found</p>
-                : <table className='table table-hover' style={{ textAlign: 'center' }} >
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Number</th>
-                            <th>From</th>
-                            <th>To</th>
-                            <th>Date</th>
-                            <th>Fare</th>
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                            <th>Seat Number</th>
-                            <th>Checked-In</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {bookings.map(booking => {
-                            return <tr key={booking.id}>
-                                <td>{booking.id}</td>
-                                <td>{booking.flightNumber}</td>
-                                <td>{booking.source}</td>
-                                <td>{booking.destination}</td>
-                                <td>{booking.date}</td>
-                                <td>{booking.fare}</td>
-                                <td>{booking.firstName}</td>
-                                <td>{booking.lastName}</td>
-                                <td>{booking.seatNumber ?? 'N/A'}</td>
-                                <td>{booking.checkinStatus ? 'Yes' : 'No'}</td>
-                                <td>
-                                    <CheckinDeleteAction
-                                        bookingId={booking.id}
-                                        checkinStatus={booking.checkinStatus}
-                                        handleCheckinClick={handleCheckinClick}
-                                        handleDeleteClick={handleDeleteClick}
-                                    />
-                                </td>
-                            </tr>
-                        })}
-                    </tbody>
-                </table>
-            }
-        </div>
-    )
-}
+// export default function BookingPage() {
+//   const [flightClass, setFlightClass] = useState("Economy");
+//   const [passengerCount, setPassengerCount] = useState(1);
+
+//   const handleSubmit = (event) => {
+//     event.preventDefault();
+//     // For now, just log the booking details
+//     console.log(`Booking Details:
+//       Class: ${flightClass}
+//       Passengers: ${passengerCount}
+//     `);
+//     alert("Your booking is confirmed!");
+//   };
+
+//   return (
+//     <>
+//       <Head>
+//         <title>Flight Booking System - Bookings</title>
+//         <meta name="description" content="Flight Booking page" />
+//       </Head>
+
+//       <main
+//         className="d-flex flex-column align-items-center justify-content-center"
+//         style={{
+//           minHeight: "100vh",
+//           backgroundImage:
+//             'url("https://media.istockphoto.com/id/951121064/photo/plane-flying-over-business-towers-in-hongkong.jpg?s=612x612&w=0&k=20&c=PNzE_Jed7J0OwuNGXQDQ7pwVsrzmk7MgoZtCuZIH7FA=")',
+//           backgroundSize: "cover",
+//           backgroundPosition: "center",
+//           backgroundRepeat: "no-repeat",
+//           backgroundAttachment: "fixed",
+//         }}
+//       >
+//         <Navbar />
+//         <div className="text-center text-white">
+//           <h1 className="heading boldest">Flight Booking</h1>
+
+//           <form className="row mt-4" onSubmit={handleSubmit}>
+//             <div className="col-12 col-md-4 mb-2">
+//               <label className="form-label">Class</label>
+//               <select
+//                 className="form-control"
+//                 value={flightClass}
+//                 onChange={(e) => setFlightClass(e.target.value)}
+//                 required
+//               >
+//                 <option value="Economy">Economy</option>
+//                 <option value="Business">Business</option>
+//                 <option value="First Class">First Class</option>
+//               </select>
+//             </div>
+//             <div className="col-12 col-md-4 mb-2">
+//               <label className="form-label">Number of Passengers</label>
+//               <input
+//                 type="number"
+//                 className="form-control"
+//                 value={passengerCount}
+//                 onChange={(e) => setPassengerCount(e.target.value)}
+//                 min="1"
+//                 required
+//               />
+//             </div>
+//             <div className="col-12 text-center">
+//               <button
+//                 type="submit"
+//                 className="btn"
+//                 style={{
+//                   backgroundColor: "#72A0C1",
+//                   borderColor: "#72A0C1",
+//                   color: "white",
+//                 }}
+//               >
+//                 Confirm Booking
+//               </button>
+//             </div>
+//           </form>
+//         </div>
+
+//         <Footer />
+//       </main>
+//     </>
+//   );
+// }

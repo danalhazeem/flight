@@ -1,33 +1,78 @@
-import { useRouter } from 'next/router';
-import { useState } from 'react';
-import airlineFlightsData from '../data/airlineFlightsData';
+import { useState } from "react";
+import { useRouter } from "next/router"; // Import the useRouter hook
+import airlineFlightsData from "../data/airlineFlightsData";
 
 export default function Flights() {
-    const router = useRouter();
-    const [selectedClass, setSelectedClass] = useState(null);
-    const [hoveredFlight, setHoveredFlight] = useState(null);
+    const [filteredFlights, setFilteredFlights] = useState(airlineFlightsData);
+    const [selectedDate, setSelectedDate] = useState("");
+    const [selectedPrice, setSelectedPrice] = useState("");
+    const router = useRouter(); // Initialize the router
 
-    // Handle selecting a flight
-    const handleFlightSelect = (flight) => {
-        // Store selected flight with class in localStorage
-        const flightWithClass = { ...flight, class: selectedClass || 'Economy' };
-        localStorage.setItem('selected-flight', JSON.stringify(flightWithClass));
+    // Handle filtering
+    const handleFilter = () => {
+        let filtered = airlineFlightsData;
 
-        // Redirect to the Payment Page
-        router.push('/payment');
+        if (selectedDate) {
+            filtered = filtered.filter(flight => 
+                new Date(flight.departure).toISOString().split("T")[0] === selectedDate
+            );
+        }
+
+        if (selectedPrice) {
+            filtered = filtered.filter(flight => 
+                flight.tickets.some(ticket => ticket.price <= parseInt(selectedPrice))
+            );
+        }
+
+        setFilteredFlights(filtered);
+    };
+
+    // Reset filters
+    const handleReset = () => {
+        setSelectedDate("");
+        setSelectedPrice("");
+        setFilteredFlights(airlineFlightsData);
+    };
+
+    // Function to handle card click (navigate to payment page)
+    const handleCardClick = (flightId) => {
+        // Navigate to the payment page with the flight ID as a query parameter
+        router.push(`/payment?flightId=${flightId}`);
     };
 
     return (
         <div className="container mt-4">
-            <h2 className="text-center mb-4">Available Flights</h2>
+            <h2 className="text-center mb-4" style={{ color: "#72A0C1" }}>Available Flights</h2>
+
+            {/* Filters */}
+            <div className="d-flex justify-content-center gap-3 mb-4">
+                <input
+                    type="date"
+                    className="form-control"
+                    value={selectedDate}
+                    onChange={(e) => setSelectedDate(e.target.value)}
+                />
+                <select
+                    className="form-control"
+                    value={selectedPrice}
+                    onChange={(e) => setSelectedPrice(e.target.value)}
+                >
+                    <option value="">Select Max Price</option>
+                    <option value="500">Up to 500 KWD</option>
+                    <option value="1000">Up to 1000 KWD</option>
+                    <option value="2000">Up to 2000 KWD</option>
+                    <option value="4000">Up to 4000 KWD</option>
+                </select>
+                <button className="btn " style={{ backgroundColor: "#72A0C1", borderColor: "#72A0C1", color: "white" }} onClick={handleFilter}>Filter</button>
+                <button className="btn btn-secondary" onClick={handleReset}>Reset</button>
+            </div>
+
             <div className="d-flex flex-column align-items-center">
-                {airlineFlightsData.map((flight, index) => (
+                {filteredFlights.map((flight, index) => (
                     <div
                         key={index}
                         className="card mb-4 shadow-lg flight-card"
-                        onMouseEnter={() => setHoveredFlight(flight)}
-                        onMouseLeave={() => setHoveredFlight(null)}
-                        onClick={() => handleFlightSelect(flight)}
+                        onClick={() => handleCardClick(flight.id)} // Call handleCardClick on card click
                     >
                         <div className="row g-0">
                             {/* Left Side - Image */}
@@ -38,7 +83,7 @@ export default function Flights() {
                                     alt={flight.airline}
                                 />
                             </div>
-                            
+
                             {/* Right Side - Flight Details */}
                             <div className="col-md-8">
                                 <div className="card-body">
@@ -47,25 +92,23 @@ export default function Flights() {
                                         <strong>{flight.from}</strong> → <strong>{flight.to}</strong> <br />
                                         <span className="text-muted">Departure:</span> {new Date(flight.departure).toLocaleString()} <br />
                                         <span className="text-muted">Arrival:</span> {new Date(flight.arrival).toLocaleString()} <br />
-                                        <span className="text-muted">Duration:</span> {flight.duration} <br />
-                                        <span className="text-muted">Class:</span> {selectedClass || 'Select Class'}
+                                        <span className="text-muted">Duration:</span> {flight.duration}
                                     </p>
+
+                                    <div className="d-flex flex-column">
+                                        {flight.tickets.map((ticket, ticketIndex) => (
+                                            <div key={ticketIndex} className="d-flex justify-content-between mb-2">
+                                                <span>{ticket.class}</span>
+                                                <span>{ticket.price} {ticket.currency}</span>
+                                            </div>
+                                        ))}
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 ))}
             </div>
-
-            {/* Hovered Flight Class Selection */}
-            {hoveredFlight && (
-                <div className="class-selection-card">
-                    <h5>Select Class for {hoveredFlight.airline}</h5>
-                    <button onClick={() => setSelectedClass('Economy')} className="btn btn-outline-primary">Economy</button>
-                    <button onClick={() => setSelectedClass('Business')} className="btn btn-outline-primary">Business</button>
-                    <button onClick={() => setSelectedClass('First Class')} className="btn btn-outline-primary">First Class</button>
-                </div>
-            )}
 
             {/* Styles */}
             <style jsx>{`
@@ -75,8 +118,8 @@ export default function Flights() {
                     border-radius: 10px;
                     overflow: hidden;
                     background: #fff;
-                    cursor: pointer;
                     transition: transform 0.2s ease-in-out;
+                    cursor: pointer; /* Add cursor pointer for clickable */
                 }
                 .flight-card:hover {
                     transform: scale(1.03);
@@ -95,22 +138,6 @@ export default function Flights() {
                 }
                 .text-muted {
                     color: #6c757d;
-                }
-                .class-selection-card {
-                    position: absolute;
-                    top: 20px;
-                    right: 20px;
-                    background: #f8f9fa;
-                    border: 1px solid #ddd;
-                    padding: 20px;
-                    border-radius: 10px;
-                    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-                    width: 200px;
-                }
-                .class-selection-card button {
-                    display: block;
-                    margin: 5px 0;
-                    width: 100%;
                 }
             `}</style>
         </div>

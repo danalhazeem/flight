@@ -1,7 +1,7 @@
 const airlineFlightsData = [
     {
       airline: "Emirates",
-      image: "https://i.pinimg.com/474x/23/bc/33/23bc3337c233c6104e0226409bd8da09.jpg",
+      image: "https://i.pinimg.com/474x/0e/d5/06/0ed5069a3290f09c5bff3aa87cb8b226.jpg",
       from: "Dubai (DXB)",
       to: "London (LHR)",
       departure: "2025-03-15T08:30:00",
@@ -15,7 +15,7 @@ const airlineFlightsData = [
     },
     {
       airline: "Qatar Airways",
-      image: "https://i.pinimg.com/474x/83/e5/d4/83e5d4359c0c1ff5d1f17f2ba3bd5f0e.jpg",
+      image: "https://i.pinimg.com/474x/03/3c/12/033c1207601a4cf122b66e1a320d5674.jpg",
       from: "Doha (DOH)",
       to: "New York (JFK)",
       departure: "2025-03-20T10:00:00",
@@ -29,7 +29,7 @@ const airlineFlightsData = [
     },
     {
       airline: "Turkish Airlines",
-      image: "https://i.pinimg.com/474x/e1/fd/89/e1fd89e5416db4c1c0bb9a92dd2c9a8e.jpg",
+      image: "https://i.pinimg.com/474x/2a/8f/76/2a8f7693be88aa9f3137d5eb2ad5e5c4.jpg",
       from: "Istanbul (IST)",
       to: "Paris (CDG)",
       departure: "2025-04-10T14:00:00",
@@ -43,7 +43,7 @@ const airlineFlightsData = [
     },
     {
       airline: "British Airways",
-      image: "https://i.pinimg.com/474x/61/66/43/616643c13026c75e85a421ec7d4b99a4.jpg",
+      image: "https://i.pinimg.com/474x/4f/f7/4f/4ff74f8cfb7828759f9d63885b74ee70.jpg",
       from: "London (LHR)",
       to: "Dubai (DXB)",
       departure: "2025-04-05T22:00:00",
@@ -57,7 +57,7 @@ const airlineFlightsData = [
     },
     {
       airline: "Lufthansa",
-      image: "https://i.pinimg.com/474x/ce/0c/ec/ce0cecde24142acba612a491edd0d3df.jpg",
+      image: "https://i.pinimg.com/474x/a4/a3/5d/a4a35d12dfeb97caf85fb4a792ddac85.jpg",
       from: "Frankfurt (FRA)",
       to: "Tokyo (NRT)",
       departure: "2025-05-12T09:30:00",
@@ -71,7 +71,7 @@ const airlineFlightsData = [
     },
     {
       airline: "Singapore Airlines",
-      image: "https://i.pinimg.com/474x/9d/4c/e0/9d4ce04bac2321e72ba677910ca0d35b.jpg",
+      image: "https://i.pinimg.com/474x/8d/66/86/8d6686bc4ffdb16143dd272b6f3b89dd.jpg",
       from: "Singapore (SIN)",
       to: "Los Angeles (LAX)",
       departure: "2025-06-08T21:45:00",
@@ -85,7 +85,7 @@ const airlineFlightsData = [
     },
     {
       airline: "Etihad Airways",
-      image: "https://i.pinimg.com/474x/7d/58/44/7d58443e32f4490596a8e5462e038479.jpg",
+      image: "https://i.pinimg.com/474x/6b/88/9f/6b889f57b35782fd3488e47a0f357df1.jpg",
       from: "Abu Dhabi (AUH)",
       to: "Sydney (SYD)",
       departure: "2025-07-20T17:00:00",

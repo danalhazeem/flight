@@ -1,93 +1,94 @@
-import { useEffect, useState, useContext } from "react"
-import { Toaster, toast } from "react-hot-toast"
-import Head from "next/head"
-import UserContext from "@/contexts/user"
-import Bookings from "@/components/bookings"
-import bookingService from "@/services/booking.service"
-import checkinService from "@/services/checkin.service"
-import 'bootstrap/dist/css/bootstrap.min.css'
+import { useState, useEffect } from "react";
 
-export default function BookingsPage() {
-    const [bookings, setBookings] = useState([])
-    const { user: { token } } = useContext(UserContext)
+// This would normally come from an API or a data store
+const mockBookings = [
+  {
+    id: 1,
+    flightNumber: "AB123",
+    flightClass: "Economy",
+    passengerCount: 2,
+    date: "2024-01-15",
+  },
+  {
+    id: 2,
+    flightNumber: "CD456",
+    flightClass: "Business",
+    passengerCount: 1,
+    date: "2024-01-10",
+  },
+];
 
-    // useEffect(() => {
-    //     bookingService.getBookings(token)
-    //         .then((bookings) => setBookings(bookings))
-    //         .catch((error) => {
-    //             console.log(error)
-    //             setBookings(null)
-    //         })
-    // }, [token])
+export default function Bookings() {
+  const [bookings, setBookings] = useState([]);
 
-    const handleCheckinClick = ({ target }) => {
-        const checkedIn = target.parentElement.previousElementSibling.innerText === 'Yes' ? true : false
-        const id = Number(target.getAttribute('data-id'))
+  // Simulate fetching past bookings on page load
+  useEffect(() => {
+    // Replace this with an actual API call if needed
+    setBookings(mockBookings);
+  }, []);
 
-        if (checkedIn) {
-            toast.error('Already checked-in!')
-            return
+  return (
+    <div className="container mt-4">
+      <h1 className="text-center mb-4" style={{ color: "#72A0C1" }}>Your Past Bookings</h1>
+      <div className="d-flex flex-column align-items-center">
+        {bookings.length === 0 ? (
+          <p>No past bookings found.</p>
+        ) : (
+          bookings.map((booking) => (
+            <div key={booking.id} className="card mb-4 shadow-lg flight-card">
+              <div className="row g-0">
+                <div className="col-md-4 d-flex align-items-center justify-content-center bg-light">
+                  <img
+                    src="https://i.pinimg.com/474x/0e/d5/06/0ed5069a3290f09c5bff3aa87cb8b226.jpg"
+                    className="img-fluid rounded-start flight-image"
+                    alt="Flight Icon"
+                  />
+                </div>
+                <div className="col-md-8">
+                  <div className="card-body">
+                    <h4 className="card-title">Flight {booking.flightNumber}</h4>
+                    <p className="card-text">
+                      <strong>Class:</strong> {booking.flightClass} <br />
+                      <strong>Passengers:</strong> {booking.passengerCount} <br />
+                      <strong>Date:</strong> {booking.date}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))
+        )}
+      </div>
+      {/* Styles */}
+      <style jsx>{`
+        .flight-card {
+          width: 90%;
+          max-width: 600px;
+          border-radius: 10px;
+          overflow: hidden;
+          background: #fff;
+          transition: transform 0.2s ease-in-out;
+          cursor: pointer;
         }
-
-        checkinService.checkin(id, token)
-            .then(({ checkinStatus, seatNumber }) => {
-                const updated = bookings.map((booking) => {
-                    return booking.id !== id
-                        ? booking : { ...booking, checkinStatus, seatNumber }
-                })
-                setBookings(updated)
-                toast.success('Checked-in successfully!')
-            })
-            .catch((error) => {
-                console.error(error)
-                const message = error.response.data.error
-                toast.error(
-                    message.charAt(0).toUpperCase() + message.substring(1)
-                    + '\nPlease refresh the page for updated info'
-                )
-            })
-    }
-
-    const handleDeleteClick = (event) => {
-        const id = Number(event.target.getAttribute('data-id'))
-        bookingService.deleteBooking(id, token)
-            .then((data) => {
-                const filtered = bookings.filter((booking) => booking.id !== id)
-                setBookings(filtered)
-                toast.success('Booking deleted successfully!')
-            })
-            .catch((error) => {
-                console.log(error)
-                toast.error(
-                    'Booking not found or already deleted'
-                    + '\nPlease refresh the page for updated info'
-                )
-            })
-    }
-
-    return (
-        <>
-            <Head>
-                <title>Flight Booking System - Bookings</title>
-                <meta name="description" content="A Flight Booking System application built using Nextjs & Spring Cloud" />
-                <meta name="viewport" content="width=device-width, initial-scale=1" />
-            </Head>
-        
-            <main className='container d-flex flex-column align-items-center mt-4 pt-4'>
-            
-                <h1 className="heading boldest">Bookings</h1>
-                <Toaster position="top-right" />
-                {bookings === null
-                    ? <p className="fs-5 mt-4">Please login to access this page</p>
-                    : <Bookings
-                        bookings={bookings}
-                        handleCheckinClick={handleCheckinClick}
-                        handleDeleteClick={handleDeleteClick}
-                    />
-                }
-                
-            </main>
-            
-        </>
-    )
+        .flight-card:hover {
+          transform: scale(1.03);
+        }
+        .flight-image {
+          height: auto;
+          width: 100%;
+          object-fit: cover;
+        }
+        .card-body {
+          padding: 20px;
+        }
+        .card-title {
+          font-size: 1.5rem;
+          font-weight: bold;
+        }
+        .text-muted {
+          color: #6c757d;
+        }
+      `}</style>
+    </div>
+  );
 }

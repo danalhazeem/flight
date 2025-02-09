@@ -1,7 +1,6 @@
 import React from "react";
 
 const FlightCard = ({ flight }) => {
-  //Format date to "20 Sep 2025"
   const formattedDate = new Date(flight.departure).toLocaleDateString("en-GB", {
     day: "2-digit",
     month: "short",
@@ -22,6 +21,7 @@ const FlightCard = ({ flight }) => {
       <div className="card-body d-flex flex-column justify-content-between">
         <h5 className="fw-bold">{flight.from} to {flight.to}</h5>
         <p className="text-muted">{formattedDate}</p> {/* Display the formatted date */}
+        <p className="text-primary fw-bold" style>Class: {flight.class}</p> {/* Show flight class */}
 
         {/* Price & Button */}
         <div className="d-flex justify-content-between align-items-center mt-auto">

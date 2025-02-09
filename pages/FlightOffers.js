@@ -28,6 +28,8 @@ const FlightsPage = () => {
             />
             <h5 className="mt-2">{flight.airline}</h5>
             <p>{flight.from} → {flight.to}</p>
+            <p className="" style={{ color: "black" }}>Class: {flight.class}</p> {/* Show flight class */}
+
 
             {/* Price & Button in same line */}
             <div className="price-button-container">

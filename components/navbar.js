@@ -3,7 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default function Navbar() {
     const items = ['home', 'flights', 'bookings'];
-
+//i
     return (
         <nav style={navStyle}>
             <div style={logoContainerStyle}>
